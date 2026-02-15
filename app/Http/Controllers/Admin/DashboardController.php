@@ -15,7 +15,7 @@ class DashboardController extends Controller
         // Menghitung total pesan untuk statistik kecil
         $totalMessages = Contact::count();
 
-        return view('admin.dashboard', compact('messages', 'totalMessages'));
+        return view('dashboard', compact('messages', 'totalMessages'));
     }
 
     public function destroy($id)
