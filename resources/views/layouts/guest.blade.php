@@ -18,28 +18,54 @@
 
     <style>
         body {
-            /* Background gelap dengan gradasi agar senada dengan portfolio */
             background: radial-gradient(circle at top right, #1e293b, #0f172a);
             color: #f8fafc;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-family: 'Figtree', sans-serif;
         }
 
-        .auth-container {
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%233b82f6' fill-opacity='0.05' d='M44.7,-76.4C58.1,-69.2,70.3,-59,79.1,-46.1C87.9,-33.1,93.3,-17.4,92.5,-1.9C91.7,13.5,84.7,28.8,75.1,42.2C65.5,55.5,53.4,66.9,39.6,74.1C25.8,81.2,10.4,84.1,-4.7,80.1C-19.8,76.1,-34.5,65.3,-47.5,54.1C-60.5,42.8,-71.7,31.2,-78.2,17.4C-84.7,3.6,-86.5,-12.4,-81.9,-26.8C-77.3,-41.2,-66.3,-54,-52.7,-61.2C-39.1,-68.4,-23,-70.1,-7.8,-74.6C7.4,-79.1,22.8,-83.6,44.7,-76.4Z' transform='translate(100 100)' /%3E%3C/svg%3E") no-repeat center;
+        .auth-wrapper {
+            width: 100%;
+            max-width: 450px;
+            /* Ukuran ideal untuk card login */
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%233b82f6' fill-opacity='0.03' d='M44.7,-76.4C58.1,-69.2,70.3,-59,79.1,-46.1C87.9,-33.1,93.3,-17.4,92.5,-1.9C91.7,13.5,84.7,28.8,75.1,42.2C65.5,55.5,53.4,66.9,39.6,74.1C25.8,81.2,10.4,84.1,-4.7,80.1C-19.8,76.1,-34.5,65.3,-47.5,54.1C-60.5,42.8,-71.7,31.2,-78.2,17.4C-84.7,3.6,-86.5,-12.4,-81.9,-26.8C-77.3,-41.2,-66.3,-54,-52.7,-61.2C-39.1,-68.4,-23,-70.1,-7.8,-74.6C7.4,-79.1,22.8,-83.6,44.7,-76.4Z' transform='translate(100 100)' /%3E%3C/svg%3E") no-repeat center;
             background-size: cover;
+            z-index: -1;
+        }
+
+        /* Memastikan elemen Vite/Tailwind tidak merusak layout Bootstrap */
+        [hidden] {
+            display: none !important;
         }
     </style>
 </head>
 
-<body class="font-sans antialiased auth-container">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-        <div class="mb-4">
-            <a href="/">
-                <i class="fa-solid fa-microchip fs-1 text-primary shadow-sm"></i>
+<body class="antialiased">
+    <div class="bg-pattern"></div>
+
+    <div class="auth-wrapper">
+        <div class="text-center mb-4">
+            <a href="/" class="text-decoration-none">
+                <i class="fa-solid fa-microchip fs-1 text-primary"
+                    style="filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));"></i>
             </a>
         </div>
 
-        <div class="w-full sm:max-w-md mt-2 px-2 overflow-hidden">
+        <div class="main-content">
             {{ $slot }}
         </div>
     </div>
