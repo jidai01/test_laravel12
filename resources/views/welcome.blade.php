@@ -29,7 +29,6 @@
             color: #f8fafc;
             overflow-x: hidden;
             scroll-behavior: auto;
-            /* JS handles smooth scroll */
         }
 
         #particles-js {
@@ -80,7 +79,7 @@
             padding: 100px 0;
         }
 
-        /* Standard Glass Card */
+        /* Glass Card */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -89,6 +88,7 @@
             border-radius: 24px;
             transition: 0.4s ease;
             height: 100%;
+            overflow: hidden;
         }
 
         .glass-card:hover {
@@ -97,20 +97,12 @@
             background: rgba(255, 255, 255, 0.06);
         }
 
-        /* --- UPDATED: High Contrast Contact Card --- */
+        /* Contact Card Contrast */
         .contact-card-contrast {
             background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
             border: 1px solid rgba(99, 102, 241, 0.3);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.1);
         }
-
-        .contact-card-contrast:hover {
-            border-color: #a855f7;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(168, 85, 247, 0.2);
-            transform: translateY(-5px);
-        }
-
-        /* ------------------------------------------- */
 
         .hero-section {
             min-height: 100vh;
@@ -151,6 +143,7 @@
             transform: scale(1.2);
         }
 
+        /* Timeline Styles for Experience */
         .timeline-item {
             border-left: 2px solid var(--glass-border);
             padding-left: 30px;
@@ -170,9 +163,16 @@
             box-shadow: 0 0 15px var(--accent);
         }
 
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #a855f7;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
         .form-control-custom {
             background: rgba(2, 6, 23, 0.5);
-            /* Lebih gelap agar input kontras */
             border: 1px solid var(--glass-border);
             color: white !important;
             border-radius: 12px;
@@ -209,7 +209,24 @@
             background: var(--primary-gradient);
             transform: translateY(-3px);
             color: white;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Project Image */
+        .project-img-wrapper {
+            height: 200px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .project-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .glass-card:hover .project-img-wrapper img {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -328,6 +345,103 @@
         </div>
     </section>
 
+    <section id="projects" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Featured Projects</h2>
+                <p class="text-secondary">Showcase of my latest data and web works</p>
+                <div class="mx-auto bg-primary" style="height: 4px; width: 60px;"></div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card">
+                        <div class="project-img-wrapper">
+                            <img src="https://via.placeholder.com/400x250/1e293b/ffffff?text=Data+Dashboard"
+                                alt="Project">
+                        </div>
+                        <div class="p-4">
+                            <span class="badge bg-primary bg-opacity-25 text-primary mb-2">Data Science</span>
+                            <h5 class="fw-bold">Sales Prediction AI</h5>
+                            <p class="text-secondary small">Using Python and Scikit-Learn to forecast sales trends with
+                                95% accuracy.</p>
+                            <a href="#" class="text-decoration-none text-white fw-bold stretched-link">View
+                                Details <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card">
+                        <div class="project-img-wrapper">
+                            <img src="https://via.placeholder.com/400x250/1e293b/ffffff?text=Web+App" alt="Project">
+                        </div>
+                        <div class="p-4">
+                            <span class="badge bg-danger bg-opacity-25 text-danger mb-2">Laravel</span>
+                            <h5 class="fw-bold">E-Commerce Platform</h5>
+                            <p class="text-secondary small">Full-stack web application with payment gateway
+                                integration.</p>
+                            <a href="#" class="text-decoration-none text-white fw-bold stretched-link">View
+                                Details <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card">
+                        <div class="project-img-wrapper">
+                            <img src="https://via.placeholder.com/400x250/1e293b/ffffff?text=Visualization"
+                                alt="Project">
+                        </div>
+                        <div class="p-4">
+                            <span class="badge bg-warning bg-opacity-25 text-warning mb-2">Tableau</span>
+                            <h5 class="fw-bold">Covid-19 Dashboard</h5>
+                            <p class="text-secondary small">Interactive visualization of pandemic spread in SEA region.
+                            </p>
+                            <a href="#" class="text-decoration-none text-white fw-bold stretched-link">View
+                                Details <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4" data-aos="fade-right">
+                    <h2 class="fw-bold sticky-top" style="top: 100px;">Work<br>Experience.</h2>
+                </div>
+                <div class="col-lg-8">
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                        <span class="timeline-date">2023 - Present</span>
+                        <h4 class="fw-bold">Senior Data Analyst</h4>
+                        <p class="text-primary mb-2">Tech Company Inc.</p>
+                        <p class="text-secondary">Leading a team of analysts to interpret large datasets and drive
+                            business strategy through actionable insights.</p>
+                    </div>
+
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                        <span class="timeline-date">2021 - 2023</span>
+                        <h4 class="fw-bold">Full Stack Developer</h4>
+                        <p class="text-primary mb-2">Creative Agency</p>
+                        <p class="text-secondary">Developed and maintained client websites using Laravel and Vue.js.
+                            Optimized database queries for better performance.</p>
+                    </div>
+
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                        <span class="timeline-date">2020 - 2021</span>
+                        <h4 class="fw-bold">Intern Data Scientist</h4>
+                        <p class="text-primary mb-2">Startup Studio</p>
+                        <p class="text-secondary">Assisted in building machine learning models for customer churn
+                            prediction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="section-padding">
         <div class="container">
             <div class="glass-card contact-card-contrast p-5" data-aos="fade-up">
@@ -412,21 +526,28 @@
         // 2. Navigasi & Smooth Scroll & REFRESH LOGIC
         const navHeight = 90;
 
-        // -- LOGIC BARU: Handle Refresh agar tidak kembali ke atas --
+        // -- UPDATED: Handle Refresh lebih robust --
         document.addEventListener('DOMContentLoaded', () => {
-            const path = window.location.pathname; // misal: "/contact"
-            // Hapus slash di depan untuk mendapatkan ID, misal "contact"
-            const targetId = path.substring(1);
+            const path = window.location.pathname;
+            // Ambil segment terakhir dari URL (misal: /my-app/contact -> contact)
+            let targetId = path.split("/").pop();
 
-            // Cek apakah ada elemen dengan ID tersebut (misal <section id="contact">)
+            // Jika kosong (halaman utama), set ke null agar tidak error
+            if (targetId === "") targetId = null;
+
+            // Cek apakah ada elemen dengan ID tersebut
             if (targetId && document.getElementById(targetId)) {
+                // Gunakan setTimeout agar layout render sempurna sebelum scroll
                 setTimeout(() => {
                     const targetElement = document.getElementById(targetId);
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
                     window.scrollTo({
-                        top: targetElement.offsetTop - navHeight,
+                        top: offsetPosition,
                         behavior: 'smooth'
                     });
-                }, 100); // Delay sedikit untuk memastikan rendering selesai
+                }, 300); // Delay ditambah sedikit
             }
         });
 
@@ -434,20 +555,24 @@
             link.addEventListener('click', function(e) {
                 const path = this.getAttribute('href');
 
-                // Jika link adalah anchor internal (misal /skills)
+                // Logic klik navigasi
                 if (path.startsWith('/') && path.length > 1) {
+                    // Ambil ID dari href, misal "/skills" -> "skills"
                     const targetId = path.substring(1);
                     const targetElement = document.getElementById(targetId);
 
                     if (targetElement) {
                         e.preventDefault();
-                        window.history.pushState(null, null, path); // Ganti URL tanpa #
+                        window.history.pushState(null, null, path);
+
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
                         window.scrollTo({
-                            top: targetElement.offsetTop - navHeight,
+                            top: offsetPosition,
                             behavior: 'smooth'
                         });
 
-                        // Tutup navbar mobile setelah klik
                         const bCollapse = bootstrap.Collapse.getInstance(document.getElementById(
                             'navbarNav'));
                         if (bCollapse) bCollapse.hide();
