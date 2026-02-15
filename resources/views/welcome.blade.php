@@ -29,7 +29,7 @@
             color: #f8fafc;
             overflow-x: hidden;
             scroll-behavior: auto;
-            /* Dikelola oleh JS untuk presisi */
+            /* JS handles smooth scroll */
         }
 
         #particles-js {
@@ -80,6 +80,7 @@
             padding: 100px 0;
         }
 
+        /* Standard Glass Card */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -95,6 +96,21 @@
             border-color: var(--accent);
             background: rgba(255, 255, 255, 0.06);
         }
+
+        /* --- UPDATED: High Contrast Contact Card --- */
+        .contact-card-contrast {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .contact-card-contrast:hover {
+            border-color: #a855f7;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(168, 85, 247, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* ------------------------------------------- */
 
         .hero-section {
             min-height: 100vh;
@@ -155,7 +171,8 @@
         }
 
         .form-control-custom {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(2, 6, 23, 0.5);
+            /* Lebih gelap agar input kontras */
             border: 1px solid var(--glass-border);
             color: white !important;
             border-radius: 12px;
@@ -163,7 +180,7 @@
         }
 
         .form-control-custom:focus {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(2, 6, 23, 0.8);
             border-color: var(--accent);
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
@@ -313,10 +330,10 @@
 
     <section id="contact" class="section-padding">
         <div class="container">
-            <div class="glass-card p-5" data-aos="fade-up">
+            <div class="glass-card contact-card-contrast p-5" data-aos="fade-up">
                 <div class="row g-5">
                     <div class="col-lg-5">
-                        <h2 class="fw-bold mb-4">Let's Collaborate!</h2>
+                        <h2 class="fw-bold mb-4 text-white">Let's Collaborate!</h2>
                         <p class="text-secondary mb-4">Butuh analisis data mendalam atau aplikasi web modern? Hubungi
                             saya.</p>
                         <div class="d-flex align-items-center mb-4">
@@ -392,8 +409,27 @@
             "max-glare": 0.1
         });
 
-        // 2. Navigasi & Smooth Scroll (Fixed logic)
+        // 2. Navigasi & Smooth Scroll & REFRESH LOGIC
         const navHeight = 90;
+
+        // -- LOGIC BARU: Handle Refresh agar tidak kembali ke atas --
+        document.addEventListener('DOMContentLoaded', () => {
+            const path = window.location.pathname; // misal: "/contact"
+            // Hapus slash di depan untuk mendapatkan ID, misal "contact"
+            const targetId = path.substring(1);
+
+            // Cek apakah ada elemen dengan ID tersebut (misal <section id="contact">)
+            if (targetId && document.getElementById(targetId)) {
+                setTimeout(() => {
+                    const targetElement = document.getElementById(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop - navHeight,
+                        behavior: 'smooth'
+                    });
+                }, 100); // Delay sedikit untuk memastikan rendering selesai
+            }
+        });
+
         document.querySelectorAll('.nav-clean').forEach(link => {
             link.addEventListener('click', function(e) {
                 const path = this.getAttribute('href');
@@ -405,7 +441,7 @@
 
                     if (targetElement) {
                         e.preventDefault();
-                        window.history.pushState(null, null, path);
+                        window.history.pushState(null, null, path); // Ganti URL tanpa #
                         window.scrollTo({
                             top: targetElement.offsetTop - navHeight,
                             behavior: 'smooth'
@@ -452,7 +488,7 @@
             });
         });
 
-        // 4. Typewriter (Fixed)
+        // 4. Typewriter
         const phrases = ['AI Models', 'Data Insights', 'Web Solutions', 'Smart Dashboards'];
         let i = 0,
             j = 0,
