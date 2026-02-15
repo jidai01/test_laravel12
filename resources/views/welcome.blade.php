@@ -28,6 +28,8 @@
             background-color: #020617;
             color: #f8fafc;
             overflow-x: hidden;
+            scroll-behavior: auto;
+            /* Dikelola oleh JS untuk presisi */
         }
 
         #particles-js {
@@ -35,6 +37,8 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            top: 0;
+            left: 0;
         }
 
         .scroll-progress {
@@ -44,18 +48,32 @@
             width: 0%;
             height: 4px;
             background: var(--primary-gradient);
-            z-index: 9999;
+            z-index: 10000;
         }
 
         .navbar {
             backdrop-filter: blur(15px);
-            background: rgba(2, 6, 23, 0.8);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(2, 6, 23, 0.85);
             transition: 0.4s;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .nav-link.active-custom {
             color: #a855f7 !important;
-            font-weight: 700;
+            position: relative;
+        }
+
+        .nav-link.active-custom::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background: #a855f7;
+            border-radius: 50%;
         }
 
         .section-padding {
@@ -65,9 +83,17 @@
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             transition: 0.4s ease;
+            height: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .hero-section {
@@ -83,6 +109,19 @@
             border: 6px solid var(--glass-border);
             padding: 8px;
             background: var(--glass-bg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         .tech-icon {
@@ -112,7 +151,7 @@
             height: 16px;
             border-radius: 50%;
             background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
+            box-shadow: 0 0 15px var(--accent);
         }
 
         .form-control-custom {
@@ -123,15 +162,10 @@
             padding: 12px;
         }
 
-        .form-control-custom::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-
         .form-control-custom:focus {
-            background: rgba(255, 255, 255, 0.08);
-            color: white;
+            background: rgba(255, 255, 255, 0.1);
             border-color: var(--accent);
-            box-shadow: none;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
         .text-gradient {
@@ -158,6 +192,7 @@
             background: var(--primary-gradient);
             transform: translateY(-3px);
             color: white;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
         }
     </style>
 </head>
@@ -168,50 +203,45 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-3 nav-clean" href="/">
+            <a class="navbar-brand fw-bold fs-3" href="/">
                 <i class="fa-solid fa-microchip text-gradient me-2"></i>JidaiIsHere
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto gap-lg-3 align-items-center">
-                    <li class="nav-item"><a class="nav-link nav-clean" href="/">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link nav-clean" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link nav-clean" href="/skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link nav-clean" href="/projects">Work</a></li>
                     <li class="nav-item"><a class="nav-link nav-clean" href="/experience">Experience</a></li>
 
-                    @guest
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><i
-                                    class="fa-solid fa-lock me-1"></i> Login</a></li>
-                        <li class="nav-item">
-                            <a href="/contact" class="btn btn-primary btn-sm rounded-pill px-4 nav-clean text-white">Contact
-                                Me</a>
-                        </li>
-                    @endguest
-
                     @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-gradient fw-bold" href="#" role="button"
-                                data-bs-toggle="dropdown">
-                                Admin
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-secondary shadow">
-                                <li><a class="dropdown-item" href="/dashboard"><i class="fa-solid fa-gauge me-2"></i>
-                                        Dashboard</a></li>
+                            <a class="nav-link dropdown-toggle text-gradient fw-bold" href="#"
+                                data-bs-toggle="dropdown">Admin</a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-secondary shadow p-2">
+                                <li><a class="dropdown-item rounded-2" href="/dashboard"><i
+                                            class="fa-solid fa-gauge me-2"></i>Dashboard</a></li>
                                 <li>
-                                    <hr class="dropdown-divider border-secondary">
+                                    <hr class="dropdown-divider">
                                 </li>
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="dropdown-item text-danger">
-                                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                                        <button type="submit" class="dropdown-item text-danger rounded-2">
+                                            <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
                                         </button>
                                     </form>
                                 </li>
                             </ul>
                         </li>
+                    @else
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><i
+                                    class="fa-solid fa-lock me-1"></i> Login</a></li>
+                        <li class="nav-item"><a href="/contact"
+                                class="btn btn-primary btn-sm rounded-pill px-4 nav-clean text-white">Contact Me</a></li>
                     @endauth
                 </ul>
             </div>
@@ -227,13 +257,13 @@
                             class="text-gradient"></span><br>With Precision.</h1>
                     <p class="lead text-secondary mb-5">
                         Saya menjembatani dunia <strong class="text-light">Data Science</strong> dan <strong
-                            class="text-light">Web Development</strong>. Mengubah data kompleks menjadi
-                        wawasan strategis serta membangun aplikasi yang cerdas dan skalabel.
+                            class="text-light">Web Development</strong>. Mengubah data kompleks menjadi wawasan
+                        strategis.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="/projects" class="btn btn-primary px-4 py-3 rounded-4 nav-clean text-white">View
+                        <a href="/projects" class="btn btn-primary px-4 py-3 rounded-4 nav-clean text-white shadow">View
                             Portfolio</a>
-                        <a href="#" class="btn btn-outline-light px-4 py-3 rounded-4"><i
+                        <a href="#" class="btn btn-outline-light px-4 py-3 rounded-4 hover-glass"><i
                                 class="fa-solid fa-download me-2"></i>Download CV</a>
                     </div>
                 </div>
@@ -241,7 +271,7 @@
                     <div class="position-relative d-inline-block">
                         <img src="{{ asset('storage/jose.JPG') }}" class="rounded-circle profile-img shadow-lg"
                             alt="Profile">
-                        <div class="position-absolute bottom-0 end-0 bg-primary p-3 rounded-circle shadow">
+                        <div class="position-absolute bottom-0 end-0 bg-primary p-3 rounded-circle shadow scale-up">
                             <i class="fa-solid fa-chart-pie text-white fs-4"></i>
                         </div>
                     </div>
@@ -256,7 +286,6 @@
                 <h2 class="fw-bold">Expertise & Tech Stack</h2>
                 <div class="mx-auto bg-primary" style="height: 4px; width: 60px;"></div>
             </div>
-
             <div class="row g-4 text-center justify-content-center">
                 <div class="col-6 col-md-2 tech-box" data-aos="fade-up" data-aos-delay="100">
                     <i class="fa-brands fa-python tech-icon" style="color: #3776ab;"></i>
@@ -270,118 +299,28 @@
                     <i class="fa-brands fa-laravel tech-icon text-danger"></i>
                     <p class="mt-2">Laravel</p>
                 </div>
-                <div class="col-6 col-md-2 tech-box" data-aos="fade-up" data-aos-delay="500">
-                    <i class="fa-solid fa-magnifying-glass-chart tech-icon text-warning"></i>
-                    <p class="mt-2">Data Analyst</p>
-                </div>
-                <div class="col-6 col-md-2 tech-box" data-aos="fade-up" data-aos-delay="600">
-                    <i class="fa-brands fa-git-alt tech-icon text-white"></i>
-                    <p class="mt-2">Version Control</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section-padding">
-        <div class="container text-center">
-            <h2 class="fw-bold mb-5" data-aos="fade-up">Featured Work</h2>
-            <div class="row g-4">
-                <div class="col-md-4" data-aos="flip-left">
-                    <a href="http://sigereja.42web.io" target="_blank" class="text-decoration-none">
-                        <div class="glass-card p-4 h-100">
-                            <i class="fa-solid fa-church fs-1 mb-3 text-gradient"></i>
-                            <h4 class="text-white">SI-Gereja</h4>
-                            <p class="text-secondary small">Sistem Informasi Manajemen Gereja St. Pio Langke Majok yang
-                                terintegrasi untuk
-                                pengelolaan data umat dan administrasi gereja.</p>
-                            <span
-                                class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">Live
-                                Demo <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
-                    <a href="http://sioenaek.42web.io" target="_blank" class="text-decoration-none">
-                        <div class="glass-card p-4 h-100">
-                            <i class="fa-solid fa-house-chimney-window fs-1 mb-3 text-gradient"></i>
-                            <h4 class="text-white">SI-Oenaek</h4>
-                            <p class="text-secondary small">Sistem Informasi Desa Oenaek untuk digitalisasi pelayanan
-                                publik dan transparansi data pemerintahan desa.</p>
-                            <span
-                                class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">Live
-                                Demo <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
-                    <a href="http://spksunscreen.42web.io" target="_blank" class="text-decoration-none">
-                        <div class="glass-card p-4 h-100">
-                            <i class="fa-solid fa-wand-magic-sparkles fs-1 mb-3 text-gradient"></i>
-                            <h4 class="text-white">SPK Sunscreen</h4>
-                            <p class="text-secondary small">Sistem Pendukung Keputusan yang memberikan rekomendasi
-                                sunscreen terbaik berdasarkan tipe kulit menggunakan algoritma cerdas.</p>
-                            <span
-                                class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">Live
-                                Demo <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="section-padding bg-black bg-opacity-25">
-        <div class="container">
-            <div class="row">
-                {{-- <div class="col-md-6" data-aos="fade-right">
-                    <h2 class="fw-bold mb-5">Professional Path</h2>
-                    <div class="timeline-item">
-                        <h5 class="fw-bold">Data Analyst & Web Developer</h5>
-                        <p class="text-accent mb-1">Freelance • 2023 - Present</p>
-                        <p class="text-secondary small">Mengembangkan sistem otomasi laporan data dan aplikasi
-                            inventaris cerdas.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h5 class="fw-bold">Junior Data Scientist</h5>
-                        <p class="text-accent mb-1">Digital Labs • 2021 - 2023</p>
-                        <p class="text-secondary small">Melakukan pembersihan data besar (cleaning) dan membangun model
-                            klasifikasi.</p>
-                    </div>
-                </div> --}}
-                <div class="col-md-12" data-aos="fade-left">
-                    <h2 class="fw-bold mb-5">Education</h2>
-                    <div class="timeline-item">
-                        <h5 class="fw-bold">Ilmu Komputer</h5>
-                        <p class="text-accent mb-1">Universitas Katolik Widya Mandira • 2022 - 2026</p>
-                        <p class="text-secondary small">Fokus pada Komputasi Cerdas dan Pengembangan Sistem Informasi.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="section-padding">
         <div class="container">
-            <div class="glass-card p-5">
+            <div class="glass-card p-5" data-aos="fade-up">
                 <div class="row g-5">
-                    <div class="col-lg-5" data-aos="fade-right">
+                    <div class="col-lg-5">
                         <h2 class="fw-bold mb-4">Let's Collaborate!</h2>
                         <p class="text-secondary mb-4">Butuh analisis data mendalam atau aplikasi web modern? Hubungi
                             saya.</p>
-                        <div class="d-flex align-items-center mb-3">
-                            <a href="mailto:hello@jidaiishere.com" class="social-link me-3"><i
-                                    class="fa-solid fa-envelope"></i></a>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="social-link me-3"><i class="fa-solid fa-envelope"></i></div>
                             <span>jidaiishere@gmail.com</span>
                         </div>
-                        <div class="d-flex align-items-center mb-3">
-                            <a href="#" class="social-link me-3"><i class="fa-solid fa-location-dot"></i></a>
-                            <span>Kupang, Nusa Tenggara Timur, Indonesia</span>
+                        <div class="d-flex align-items-center">
+                            <div class="social-link me-3"><i class="fa-solid fa-location-dot"></i></div>
+                            <span>Kupang, NTT, Indonesia</span>
                         </div>
                     </div>
-                    <div class="col-lg-7" data-aos="fade-left">
+                    <div class="col-lg-7">
                         <form id="contactForm">
                             @csrf
                             <div class="row g-3">
@@ -397,10 +336,10 @@
                                     <textarea name="message" class="form-control form-control-custom" rows="5"
                                         placeholder="Tell me about your project..." required></textarea>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 text-end">
                                     <button type="submit" id="btnSend"
-                                        class="btn btn-primary w-100 py-3 rounded-4 fw-bold text-white shadow">
-                                        Send Message
+                                        class="btn btn-primary px-5 py-3 rounded-4 fw-bold text-white shadow">
+                                        Send Message <i class="fa-solid fa-paper-plane ms-2"></i>
                                     </button>
                                 </div>
                                 <div class="col-12 mt-3" id="formResponse"></div>
@@ -412,7 +351,7 @@
         </div>
     </section>
 
-    <footer class="py-5 text-center border-top border-secondary border-opacity-25">
+    <footer class="py-5 text-center border-top border-secondary border-opacity-25 mt-5">
         <div class="container">
             <div class="d-flex justify-content-center gap-4 mb-4">
                 <a href="https://github.com/jidai01" target="_blank" class="social-link"><i
@@ -433,53 +372,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
     <script>
-        // 1. AOS & Tilt
+        // 1. Inisialisasi library
         AOS.init({
             duration: 1000,
             once: true
         });
         VanillaTilt.init(document.querySelectorAll(".glass-card"), {
             max: 5,
-            speed: 400
+            speed: 400,
+            glare: true,
+            "max-glare": 0.1
         });
 
-        // 2. Navigation & Clean URL
-        const navHeight = 80;
+        // 2. Navigasi & Smooth Scroll (Fixed logic)
+        const navHeight = 90;
         document.querySelectorAll('.nav-clean').forEach(link => {
             link.addEventListener('click', function(e) {
                 const path = this.getAttribute('href');
-                if (path.startsWith('/')) {
-                    e.preventDefault();
-                    const targetId = path === '/' ? 'home' : path.replace('/', '');
+
+                // Jika link adalah anchor internal (misal /skills)
+                if (path.startsWith('/') && path.length > 1) {
+                    const targetId = path.substring(1);
                     const targetElement = document.getElementById(targetId);
 
                     if (targetElement) {
+                        e.preventDefault();
                         window.history.pushState(null, null, path);
                         window.scrollTo({
                             top: targetElement.offsetTop - navHeight,
                             behavior: 'smooth'
                         });
-                        const navbarCollapse = document.querySelector('.navbar-collapse');
-                        if (navbarCollapse.classList.contains('show')) {
-                            new bootstrap.Collapse(navbarCollapse).hide();
-                        }
+
+                        // Tutup navbar mobile setelah klik
+                        const bCollapse = bootstrap.Collapse.getInstance(document.getElementById(
+                            'navbarNav'));
+                        if (bCollapse) bCollapse.hide();
                     }
+                } else if (path === '/') {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    window.history.pushState(null, null, '/');
                 }
             });
         });
 
-        // 3. Scroll Spy & Progress
+        // 3. Scroll Progress & Spy
         window.addEventListener('scroll', () => {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
             document.getElementById("scrollBar").style.width = scrolled + "%";
 
+            // Scroll Spy
             const sections = ['home', 'skills', 'projects', 'experience', 'contact'];
             sections.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
-                    const offset = el.offsetTop - (navHeight + 20);
+                    const offset = el.offsetTop - (navHeight + 50);
                     if (winScroll >= offset && winScroll < offset + el.offsetHeight) {
                         document.querySelectorAll('.nav-link').forEach(nav => {
                             nav.classList.remove('active-custom');
@@ -492,35 +444,38 @@
             });
         });
 
-        // 4. Typewriter
+        // 4. Typewriter (Fixed)
         const phrases = ['AI Models', 'Data Insights', 'Web Solutions', 'Smart Dashboards'];
         let i = 0,
             j = 0,
-            current = '',
             isDeleting = false;
 
         function type() {
-            current = phrases[i];
-            isDeleting ? j-- : j++;
+            const current = phrases[i];
             const typewriterEl = document.getElementById('typewriter');
-            if (typewriterEl) typewriterEl.innerHTML = current.substring(0, j);
+            if (!typewriterEl) return;
 
-            if (!isDeleting && j == current.length) {
+            typewriterEl.textContent = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
+
+            if (!isDeleting && j > current.length) {
                 isDeleting = true;
                 setTimeout(type, 2000);
-            } else if (isDeleting && j == 0) {
+            } else if (isDeleting && j < 0) {
                 isDeleting = false;
                 i = (i + 1) % phrases.length;
+                j = 0;
                 setTimeout(type, 500);
-            } else setTimeout(type, isDeleting ? 50 : 100);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
         }
         type();
 
-        // 5. Particles
+        // 5. Particles.js config
         particlesJS('particles-js', {
             "particles": {
                 "number": {
-                    "value": 60
+                    "value": 50
                 },
                 "color": {
                     "value": "#6366f1"
@@ -545,64 +500,39 @@
             }
         });
 
-        // 6. CONTACT FORM AJAX HANDLER (NEW)
+        // 6. Contact Form Ajax
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
             const btn = document.getElementById('btnSend');
             const responseDiv = document.getElementById('formResponse');
-            const formData = new FormData(this);
 
-            // Set Loading State
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-2"></i>Sending...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Sending...';
             btn.disabled = true;
-            responseDiv.innerHTML = '';
 
             try {
                 const response = await fetch('/contact/send', {
                     method: 'POST',
-                    body: formData,
+                    body: new FormData(this),
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Accept': 'application/json'
+                        'X-Requested-With': 'XMLHttpRequest'
                     }
                 });
 
                 const result = await response.json();
-
                 if (response.ok) {
-                    responseDiv.innerHTML = `<div class="alert alert-success bg-success bg-opacity-10 border-success text-success rounded-4">
-                        <i class="fa-solid fa-check-circle me-2"></i>${result.success}
-                    </div>`;
+                    responseDiv.innerHTML =
+                        `<div class="alert alert-success border-0 bg-success bg-opacity-10 text-success rounded-4"><i class="fa-solid fa-check me-2"></i>${result.success}</div>`;
                     this.reset();
                 } else {
-                    const errorMsg = result.message || 'Something went wrong.';
-                    responseDiv.innerHTML = `<div class="alert alert-danger bg-danger bg-opacity-10 border-danger text-danger rounded-4">
-                        <i class="fa-solid fa-exclamation-circle me-2"></i>${errorMsg}
-                    </div>`;
+                    responseDiv.innerHTML =
+                        `<div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger rounded-4">Something went wrong.</div>`;
                 }
             } catch (error) {
-                responseDiv.innerHTML = `<div class="alert alert-danger bg-danger bg-opacity-10 border-danger text-danger rounded-4">
-                    <i class="fa-solid fa-wifi me-2"></i>Connection error. Please try again.
-                </div>`;
+                responseDiv.innerHTML =
+                    `<div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger rounded-4">Server error.</div>`;
             } finally {
-                btn.innerHTML = 'Send Message';
+                btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane ms-2"></i>';
                 btn.disabled = false;
-            }
-        });
-
-        Handle Refresh
-        window.addEventListener('load', () => {
-            const path = window.location.pathname;
-            const targetId = path === '/' ? 'home' : path.replace('/', '');
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                setTimeout(() => {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - navHeight,
-                        behavior: 'smooth'
-                    });
-                }, 100);
             }
         });
     </script>
