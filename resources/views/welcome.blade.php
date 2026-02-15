@@ -591,20 +591,20 @@
             }
         });
 
-        // Handle Refresh
-        // window.addEventListener('load', () => {
-        //     const path = window.location.pathname;
-        //     const targetId = path === '/' ? 'home' : path.replace('/', '');
-        //     const targetElement = document.getElementById(targetId);
-        //     if (targetElement) {
-        //         setTimeout(() => {
-        //             window.scrollTo({
-        //                 top: targetElement.offsetTop - navHeight,
-        //                 behavior: 'smooth'
-        //             });
-        //         }, 100);
-        //     }
-        // });
+        Handle Refresh
+        window.addEventListener('load', () => {
+            const path = window.location.pathname;
+            const targetId = path === '/' ? 'home' : path.replace('/', '');
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - navHeight,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+        });
     </script>
 </body>
 
