@@ -4,139 +4,167 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Portfolio Saya') }}</title>
+    <title>{{ config('app.name', 'Creative Portfolio') }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
         rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfdff;
-            color: #1e293b;
+            background-color: #020617;
+            /* Darker background for premium feel */
+            color: #f8fafc;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* Navbar Modern */
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 10px;
+        }
+
+        /* --- Navbar (Glassmorphism) --- */
         .navbar {
-            backdrop-filter: blur(10px);
-            background-color: rgba(15, 23, 42, 0.9) !important;
-            padding: 1rem 0;
+            backdrop-filter: blur(20px);
+            background-color: rgba(15, 23, 42, 0.7) !important;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--glass-border);
         }
 
-        /* Hero Section dengan Mesh Gradient */
+        /* --- Hero Section --- */
         .hero-section {
-            padding: 160px 0 100px;
-            background-color: #0f172a;
-            background-image:
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0, transparent 50%);
-            color: white;
+            padding: 180px 0 120px;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent),
+                radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.15), transparent);
+        }
+
+        .profile-wrapper {
             position: relative;
-            overflow: hidden;
+            display: inline-block;
         }
 
         .profile-img {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
-            border: 8px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.5s ease;
+            border: 4px solid var(--glass-border);
+            padding: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .profile-img:hover {
+            transform: scale(1.05) rotate(2deg);
             border-color: #6366f1;
-            transform: scale(1.05) rotate(5deg);
         }
 
-        /* Button Custom */
+        /* --- Glow Effect --- */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
         .btn-primary-custom {
             background: var(--primary-gradient);
             border: none;
             color: white;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s;
+            padding: 14px 32px;
+            border-radius: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary-custom:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
             color: white;
         }
 
-        /* Portfolio Cards */
-        .card-portfolio {
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 20px;
+        /* --- Glass Cards --- */
+        .card-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: all 0.4s ease;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: white;
         }
 
-        .card-portfolio:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        .card-glass:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-10px);
         }
 
-        .card-portfolio img {
-            transition: transform 0.6s;
-        }
-
-        .card-portfolio:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Section Title */
-        .section-title {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 0;
+        .feature-icon-box {
             width: 50px;
-            height: 4px;
+            height: 50px;
             background: var(--primary-gradient);
-            border-radius: 2px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Section Titles --- */
+        .section-tag {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #6366f1;
+            display: block;
+            margin-bottom: 10px;
         }
 
         footer {
-            background-color: #0f172a !important;
-            padding: 60px 0 30px;
+            border-top: 1px solid var(--glass-border);
+            padding: 100px 0 50px;
         }
 
         .social-link {
-            width: 45px;
-            height: 45px;
-            display: inline-flex;
+            width: 55px;
+            height: 55px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            font-size: 1.4rem;
             color: white;
-            text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         .social-link:hover {
             background: var(--primary-gradient);
+            transform: translateY(-5px) rotate(8deg);
             color: white;
-            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -145,55 +173,58 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="#">My<span style="color: #6366f1;">Folio</span></a>
+            <a class="navbar-brand fw-extrabold fs-3 d-flex align-items-center" href="#">
+                <i class="fa-solid fa-code logo-icon me-2" style="color: #6366f1;"></i>
+                <span>DEV<span style="color: #a855f7;">PORT</span></span>
+            </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+                <i class="fa-solid fa-bars-staggered"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
                     <li class="nav-item"><a class="nav-link px-3" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#about">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#projects">Proyek</a></li>
-                    <li class="nav-item me-lg-3"><a class="nav-link px-3" href="#contact">Kontak</a></li>
-
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            @auth
-                                <a href="{{ url('/dashboard') }}"
-                                    class="btn btn-outline-light btn-sm rounded-pill px-4">Dashboard</a>
-                            @else
-                                <a href="{{ route('login') }}" class="btn btn-link text-white text-decoration-none me-2">Log
-                                    in</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}"
-                                        class="btn btn-primary-custom btn-sm rounded-pill">Sign Up</a>
-                                @endif
-                            @endauth
-                        </li>
-                    @endif
+                    <li class="nav-item"><a class="nav-link px-3" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#projects">Work</a></li>
+                    <li class="nav-item me-lg-4"><a class="nav-link px-3" href="#contact">Contact</a></li>
+                    <li class="nav-item">
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-4 border-secondary">
+                            <i class="fa-solid fa-download me-2"></i>CV
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <header id="home" class="hero-section text-center">
-        <div class="container">
-            <div class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-3 py-2 mb-4"
-                style="backdrop-filter: blur(5px);">
-                Available for New Projects
+        <div class="container" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="badge rounded-pill px-4 py-2 mb-4"
+                style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); color: #818cf8;">
+                <i class="fa-solid fa-sparkles me-2 text-warning"></i> Available for New Opportunities
             </div>
-            <img src="https://ui-avatars.com/api/?name=Dev&background=6366f1&color=fff&size=200" alt="Profile"
-                class="rounded-circle profile-img mb-4 shadow-lg">
-            <h1 class="display-3 fw-bold mb-3">Hi, I'm <span
-                    style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Creative
-                    Developer</span></h1>
-            <p class="lead mb-5 text-secondary mx-auto" style="max-width: 600px;">Crafting high-performance web
-                applications with Laravel 12 and cutting-edge frontend technologies.</p>
+
+            <div class="profile-wrapper mb-4">
+                <img src="https://ui-avatars.com/api/?name=JS&background=6366f1&color=fff&size=200" alt="Profile"
+                    class="rounded-circle profile-img shadow-lg">
+            </div>
+
+            <h1 class="display-2 fw-bolder mb-3">Crafting <span class="text-glow"
+                    style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Future-Proof</span>
+                Software</h1>
+
+            <p class="lead mb-5 text-secondary mx-auto" style="max-width: 700px; font-weight: 400;">
+                Full-stack Developer spesialis <b>Laravel 12</b> & <b>Modern UI</b>. Mengubah ide kompleks menjadi
+                pengalaman digital yang memukau.
+            </p>
+
             <div class="d-flex justify-content-center gap-3">
-                <a href="#projects" class="btn btn-primary-custom shadow">View My Work</a>
-                <a href="#contact" class="btn btn-outline-light px-4 py-2 rounded-12"
-                    style="border-radius: 12px; border-color: rgba(255,255,255,0.2);">Let's Talk</a>
+                <a href="#projects" class="btn btn-primary-custom">
+                    Explore My Work <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+                <a href="#contact" class="btn btn-link text-white text-decoration-none px-4">
+                    Get in Touch
+                </a>
             </div>
         </div>
     </header>
@@ -201,114 +232,61 @@
     <section id="about" class="py-5 my-5">
         <div class="container">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <h4 class="text-primary fw-bold">About Me</h4>
-                    <h2 class="fw-bold mb-4 display-6">Helping businesses with <br>clean and scalable code.</h2>
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="section-tag">Identity</span>
+                    <h2 class="fw-bold mb-4 display-5">Driven by Code, <br>Defined by Design.</h2>
                     <p class="text-secondary lh-lg mb-4">
-                        I specialize in Laravel development, creating robust backends and seamless user experiences. My
-                        goal is to transform complex problems into simple, elegant digital solutions.
+                        Saya percaya bahwa setiap baris kode harus memiliki tujuan. Fokus saya adalah membangun sistem
+                        yang tidak hanya bekerja dengan sempurna secara backend, tetapi juga memanjakan mata secara
+                        frontend.
                     </p>
-                    <div class="row g-3">
-                        <div class="col-6">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-patch-check-fill text-primary fs-4 me-2"></i>
-                                <span class="fw-semibold">Laravel Expert</span>
+                    <div class="row g-4">
+                        <div class="col-sm-6">
+                            <div class="card-glass p-3 d-flex align-items-center">
+                                <i class="fa-solid fa-bolt text-warning me-3"></i>
+                                <span>Fast Delivery</span>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-patch-check-fill text-primary fs-4 me-2"></i>
-                                <span class="fw-semibold">UI/UX Design</span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-patch-check-fill text-primary fs-4 me-2"></i>
-                                <span class="fw-semibold">API Integration</span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-patch-check-fill text-primary fs-4 me-2"></i>
-                                <span class="fw-semibold">Database Security</span>
+                        <div class="col-sm-6">
+                            <div class="card-glass p-3 d-flex align-items-center">
+                                <i class="fa-solid fa-lock text-info me-3"></i>
+                                <span>Security First</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="position-relative p-4">
-                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-10 rounded-4 transform-rotate-3"
-                            style="transform: rotate(3deg);"></div>
-                        <img src="https://placehold.co/600x450/0f172a/ffffff?text=Modern+Workspace"
-                            class="img-fluid rounded-4 shadow-lg position-relative" alt="Coding Image">
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card-glass p-2">
+                        <img src="https://placehold.co/600x400/0f172a/6366f1?text=Clean+Code+Minimalist"
+                            class="img-fluid rounded-4 shadow-lg" alt="Coding">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="py-5 bg-light rounded-5 mx-2 mx-md-4">
-        <div class="container py-4">
-            <div class="text-center mb-5">
-                <h4 class="text-primary fw-bold">Portfolio</h4>
-                <h2 class="fw-bold section-title">Featured Projects</h2>
+    <section id="projects" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="fw-bold display-6">Featured Creations</h2>
             </div>
 
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card card-portfolio h-100 p-3">
-                        <div class="overflow-hidden rounded-4 mb-3">
-                            <img src="https://placehold.co/600x400/4f46e5/ffffff?text=E-Commerce"
-                                class="card-img-top rounded-4" alt="Project 1">
-                        </div>
-                        <div class="card-body p-2">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-primary bg-opacity-10 text-primary">Web App</span>
-                                <small class="text-muted">2026</small>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-glass h-100">
+                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=Fintech+App"
+                            class="card-img-top p-2 rounded-5" alt="Project">
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-3">
+                                <span class="badge bg-dark border border-secondary small">Laravel</span>
+                                <span class="badge bg-dark border border-secondary small">React</span>
                             </div>
-                            <h5 class="fw-bold">Modern E-Commerce</h5>
-                            <p class="text-muted small">Full-stack solution with real-time analytics and payment
-                                gateway.</p>
-                            <a href="#" class="text-primary text-decoration-none fw-semibold">View Case Study <i
-                                    class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card card-portfolio h-100 p-3">
-                        <div class="overflow-hidden rounded-4 mb-3">
-                            <img src="https://placehold.co/600x400/7c3aed/ffffff?text=SaaS+Dashboard"
-                                class="card-img-top rounded-4" alt="Project 2">
-                        </div>
-                        <div class="card-body p-2">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-success bg-opacity-10 text-success">SaaS</span>
-                                <small class="text-muted">2025</small>
-                            </div>
-                            <h5 class="fw-bold">Analytics Dashboard</h5>
-                            <p class="text-muted small">Complex data visualization with Laravel Echo and Chart.js.</p>
-                            <a href="#" class="text-primary text-decoration-none fw-semibold">View Case Study <i
-                                    class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card card-portfolio h-100 p-3">
-                        <div class="overflow-hidden rounded-4 mb-3">
-                            <img src="https://placehold.co/600x400/db2777/ffffff?text=Travel+API"
-                                class="card-img-top rounded-4" alt="Project 3">
-                        </div>
-                        <div class="card-body p-2">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-info bg-opacity-10 text-info">API</span>
-                                <small class="text-muted">2025</small>
-                            </div>
-                            <h5 class="fw-bold">Travel Booking API</h5>
-                            <p class="text-muted small">Headless CMS integration for seamless booking experiences.</p>
-                            <a href="#" class="text-primary text-decoration-none fw-semibold">View Case Study <i
-                                    class="bi bi-arrow-right ms-1"></i></a>
+                            <h5 class="fw-bold">Nexus Banking System</h5>
+                            <p class="text-secondary small">Sistem perbankan digital dengan fitur enkripsi tingkat
+                                tinggi.</p>
+                            <a href="#" class="text-decoration-none text-primary fw-bold small">Case Study <i
+                                    class="fa-solid fa-chevron-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -316,23 +294,33 @@
         </div>
     </section>
 
-    <footer class="text-white mt-5" id="contact">
-        <div class="container text-center">
-            <h2 class="fw-bold mb-4">Let's work together</h2>
-            <p class="text-secondary mb-5">Currently open to freelance opportunities and full-time positions.</p>
+    <footer id="contact" class="text-white">
+        <div class="container text-center" data-aos="fade-up">
+            <h2 class="display-5 fw-bold mb-4">Ready to start a project?</h2>
+            <p class="text-secondary mb-5">Saya selalu terbuka untuk diskusi teknologi atau tawaran kolaborasi yang
+                menarik.</p>
+
             <div class="d-flex justify-content-center gap-3 mb-5">
-                <a href="#" class="social-link"><i class="bi bi-github"></i></a>
-                <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
-                <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+                <a href="#" class="social-link"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fa-regular fa-envelope"></i></a>
             </div>
-            <hr class="opacity-10 mb-4">
-            <p class="text-secondary small mb-0">&copy; {{ date('Y') }} {{ config('app.name') }}. Built with ❤️ in
-                Laravel 12.</p>
+
+            <div class="mt-5 pt-4 opacity-50 small">
+                &copy; 2026 {{ config('app.name') }}. Built with passion & Laravel 12.
+            </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+    </script>
 </body>
 
 </html>
