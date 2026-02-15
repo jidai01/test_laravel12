@@ -191,7 +191,7 @@
             background: rgba(15, 23, 42, 0.95) !important;
             backdrop-filter: blur(20px);
             border: 1px solid var(--nav-border);
-            border-radius: 12px;
+            /* border-radius: 12px; */
             overflow: hidden;
             min-width: 200px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
