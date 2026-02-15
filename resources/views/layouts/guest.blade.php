@@ -58,12 +58,12 @@
     <div class="bg-pattern"></div>
 
     <div class="auth-wrapper">
-        <div class="text-center mb-4">
+        {{-- <div class="text-center mb-4">
             <a href="/" class="text-decoration-none">
                 <i class="fa-solid fa-microchip fs-1 text-primary"
                     style="filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));"></i>
             </a>
-        </div>
+        </div> --}}
 
         <div class="main-content">
             {{ $slot }}
