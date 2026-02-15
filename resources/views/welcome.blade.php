@@ -299,6 +299,14 @@
                     <i class="fa-brands fa-laravel tech-icon text-danger"></i>
                     <p class="mt-2">Laravel</p>
                 </div>
+                <div class="col-6 col-md-2 tech-box" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fa-solid fa-magnifying-glass-chart tech-icon text-warning"></i>
+                    <p class="mt-2">Data Analyst</p>
+                </div>
+                <div class="col-6 col-md-2 tech-box" data-aos="fade-up" data-aos-delay="600">
+                    <i class="fa-brands fa-git-alt tech-icon text-white"></i>
+                    <p class="mt-2">Version Control</p>
+                </div>
             </div>
         </div>
     </section>
@@ -336,10 +344,10 @@
                                     <textarea name="message" class="form-control form-control-custom" rows="5"
                                         placeholder="Tell me about your project..." required></textarea>
                                 </div>
-                                <div class="col-12 text-end">
+                                <div class="col-12">
                                     <button type="submit" id="btnSend"
-                                        class="btn btn-primary px-5 py-3 rounded-4 fw-bold text-white shadow">
-                                        Send Message <i class="fa-solid fa-paper-plane ms-2"></i>
+                                        class="btn btn-primary w-100 py-3 rounded-4 fw-bold text-white shadow">
+                                        Send Message
                                     </button>
                                 </div>
                                 <div class="col-12 mt-3" id="formResponse"></div>
