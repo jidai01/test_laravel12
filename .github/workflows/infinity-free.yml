@@ -12,11 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clone Code
       - name: Get latest code
         uses: actions/checkout@v4
 
-      # 2. Setup PHP
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -24,11 +22,9 @@ jobs:
           extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
           coverage: none
 
-      # 3. Install Composer Dependencies (Backend)
       - name: Install Composer Dependencies
         run: composer install --no-dev --optimize-autoloader --no-interaction
 
-      # 4. Setup Node.js & Install Dependencies (Frontend)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -36,27 +32,25 @@ jobs:
 
       - name: Install NPM & Build Assets
         run: |
-          npm ci  # Menggunakan 'ci' lebih stabil untuk environment CI/CD daripada 'install'
+          npm ci
           chmod +x node_modules/.bin/vite
           npm run build
 
-      # 5. Prepare .env for production (Optional but helpful)
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-      # 6. Deploy via FTP
       - name: Deploy to InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ftpupload.net
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /jidai-test-laravel12.42web.io/htdocs/
-          # Tambahkan baris di bawah ini agar folder build ikut terkirim
-          dangerously-disable-ci-check: true 
+          server-dir: jidai-test-laravel12.42web.io/htdocs/
+          dangerously-disable-ci-check: true
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
+            **/vendor/**
             **/tests/**
             **/.env
+            **/storage/framework/cache/**
+            **/storage/framework/sessions/**
+            **/storage/framework/views/**
