@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,3 +40,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+
+Route::get('/deploy-db-12345', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        Artisan::call('db:seed', ['--force' => true]);
+        return "Database migrated & seeded successfully!";
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+});
