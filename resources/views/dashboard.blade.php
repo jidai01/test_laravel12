@@ -41,7 +41,7 @@
                         <tr>
                             <th class="col-date">Date</th>
                             <th class="col-sender">Sender</th>
-                            <th class="col-subject">Subject</th>
+                            {{-- <th class="col-subject">Subject</th> --}}
                             <th class="col-message">Message Preview</th>
                             <th class="col-actions text-center">Actions</th>
                         </tr>
@@ -54,9 +54,9 @@
                                     <div class="sender-name">{{ $msg->name }}</div>
                                     <div class="sender-email">{{ $msg->email }}</div>
                                 </td>
-                                <td class="cell-subject">
+                                {{-- <td class="cell-subject">
                                     <span class="subject-badge">{{ $msg->subject }}</span>
-                                </td>
+                                </td> --}}
                                 <td class="cell-preview">
                                     <p class="preview-text">{{ $msg->message }}</p>
                                 </td>
@@ -115,10 +115,10 @@
                             <label>From</label>
                             <p>{{ $msg->name }} <span>&lt;{{ $msg->email }}&gt;</span></p>
                         </div>
-                        <div class="info-section">
+                        {{-- <div class="info-section">
                             <label>Subject</label>
                             <p class="subject-text">{{ $msg->subject }}</p>
-                        </div>
+                        </div> --}}
                         <div class="info-section divider">
                             <label>Message Content</label>
                             <div class="content-box">
