@@ -16,6 +16,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Tambahkan rute ini agar saat refresh browser tidak 404
+Route::get('/skills', function () { return view('welcome'); });
+Route::get('/projects', function () { return view('welcome'); });
+Route::get('/experience', function () { return view('welcome'); });
+Route::get('/contact', function () { return view('welcome'); });
+
 // Route untuk menerima pesan dari form kontak
 Route::post('/contact/send', [ContactController::class, 'store'])->name('contact.send');
 
