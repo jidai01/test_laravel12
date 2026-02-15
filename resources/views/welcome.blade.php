@@ -195,7 +195,8 @@
                     <h1 class="display-2 fw-bold mb-4">Crafting <span id="typewriter"
                             class="text-gradient"></span><br>With Precision.</h1>
                     <p class="lead text-secondary mb-5">
-                        Saya menjembatani dunia <strong class="text-light">Data Science</strong> dan <strong class="text-light">Web Development</strong>. Mengubah data kompleks menjadi
+                        Saya menjembatani dunia <strong class="text-light">Data Science</strong> dan <strong
+                            class="text-light">Web Development</strong>. Mengubah data kompleks menjadi
                         wawasan strategis serta membangun aplikasi yang cerdas dan skalabel.
                     </p>
                     <div class="d-flex gap-3">
@@ -255,27 +256,45 @@
             <h2 class="fw-bold mb-5" data-aos="fade-up">Featured Work</h2>
             <div class="row g-4">
                 <div class="col-md-4" data-aos="flip-left">
-                    <div class="glass-card p-4 h-100">
-                        <i class="fa-solid fa-brain fs-1 mb-3 text-gradient"></i>
-                        <h4>ML Prediction</h4>
-                        <p class="text-secondary small">Model prediksi dan klasifikasi data menggunakan Machine Learning.</p>
-                    </div>
+                    <a href="http://sigereja.42web.io" target="_blank" class="text-decoration-none">
+                        <div class="glass-card p-4 h-100">
+                            <i class="fa-solid fa-church fs-1 mb-3 text-gradient"></i>
+                            <h4 class="text-white">SI-Gereja</h4>
+                            <p class="text-secondary small">Sistem Informasi Manajemen Gereja terintegrasi untuk
+                                pengelolaan data jemaat dan administrasi gerejawi.</p>
+                            <span
+                                class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">Live
+                                Demo <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
+                        </div>
+                    </a>
                 </div>
+
                 <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
-                    <div class="glass-card p-4 h-100">
-                        <i class="fa-solid fa-chart-line fs-1 mb-3 text-gradient"></i>
-                        <h4>Sales Dashboard</h4>
-                        <p class="text-secondary small">Visualisasi data interaktif menggunakan integrasi
-                            Web.</p>
-                    </div>
+                    <a href="http://sioenaek.42web.io" target="_blank" class="text-decoration-none">
+                        <div class="glass-card p-4 h-100">
+                            <i class="fa-solid fa-house-chimney-window fs-1 mb-3 text-gradient"></i>
+                            <h4 class="text-white">SI-Oenaek</h4>
+                            <p class="text-secondary small">Sistem Informasi Desa Oenaek untuk digitalisasi pelayanan
+                                publik dan transparansi data pemerintahan desa.</p>
+                            <span
+                                class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">Live
+                                Demo <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
+                        </div>
+                    </a>
                 </div>
+
                 <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
-                    <div class="glass-card p-4 h-100">
-                        <i class="fa-solid fa-globe fs-1 mb-3 text-gradient"></i>
-                        <h4>E-Commerce AI</h4>
-                        <p class="text-secondary small">Sistem rekomendasi produk berbasis AI pada platform Laravel.
-                        </p>
-                    </div>
+                    <a href="http://spksunscreen.42web.io" target="_blank" class="text-decoration-none">
+                        <div class="glass-card p-4 h-100">
+                            <i class="fa-solid fa-wand-magic-sparkles fs-1 mb-3 text-gradient"></i>
+                            <h4 class="text-white">SPK Sunscreen</h4>
+                            <p class="text-secondary small">Sistem Pendukung Keputusan yang memberikan rekomendasi
+                                sunscreen terbaik berdasarkan tipe kulit menggunakan algoritma cerdas.</p>
+                            <span
+                                class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">Live
+                                Demo <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -364,9 +383,12 @@
     <footer class="py-5 text-center border-top border-secondary border-opacity-25">
         <div class="container">
             <div class="d-flex justify-content-center gap-4 mb-4">
-                <a href="https://github.com/jidai01" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/joseray-lopes-da-cruz-a8916b3b0/" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="https://www.instagram.com/jerayldc/" target="_blank" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://github.com/jidai01" target="_blank" class="social-link"><i
+                        class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/joseray-lopes-da-cruz-a8916b3b0/" target="_blank"
+                    class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/jerayldc/" target="_blank" class="social-link"><i
+                        class="fa-brands fa-instagram"></i></a>
             </div>
             <p class="text-secondary small">© 2026 Developed with <i class="fa-solid fa-heart text-danger"></i> by
                 JidaiIsHere</p>
