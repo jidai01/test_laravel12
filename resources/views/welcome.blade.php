@@ -260,8 +260,8 @@
                         <div class="glass-card p-4 h-100">
                             <i class="fa-solid fa-church fs-1 mb-3 text-gradient"></i>
                             <h4 class="text-white">SI-Gereja</h4>
-                            <p class="text-secondary small">Sistem Informasi Manajemen Gereja terintegrasi untuk
-                                pengelolaan data jemaat dan administrasi gerejawi.</p>
+                            <p class="text-secondary small">Sistem Informasi Manajemen Gereja St. Pio Langke Majok yang terintegrasi untuk
+                                pengelolaan data umat dan administrasi gereja.</p>
                             <span
                                 class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">Live
                                 Demo <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></span>
