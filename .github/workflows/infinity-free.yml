@@ -52,10 +52,11 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /jidai-test-laravel12.42web.io/htdocs/
-          # Kita exclude folder yang tidak diperlukan agar deploy lebih cepat
+          # Tambahkan baris di bawah ini agar folder build ikut terkirim
+          dangerously-disable-ci-check: true 
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
-            tests/**
-            storage/logs/**
+            **/tests/**
+            **/.env
