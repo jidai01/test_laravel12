@@ -175,13 +175,44 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto gap-lg-3">
-                    <li class="nav-item"><a class="nav-link nav-clean" href="/">Home</a></li>
+                <ul class="navbar-nav ms-auto gap-lg-3 align-items-center">
+                    <li class="nav-item"><a class="nav-link nav-clean" href="/">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link nav-clean" href="/skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link nav-clean" href="/projects">Work</a></li>
                     <li class="nav-item"><a class="nav-link nav-clean" href="/experience">Experience</a></li>
-                    <li class="nav-item"><a href="/contact"
-                            class="btn btn-primary btn-sm rounded-pill px-4 nav-clean text-white">Contact Me</a></li>
+
+                    @guest
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><i
+                                    class="fa-solid fa-lock me-1"></i> Login</a></li>
+                        <li class="nav-item">
+                            <a href="/contact" class="btn btn-primary btn-sm rounded-pill px-4 nav-clean text-white">Contact
+                                Me</a>
+                        </li>
+                    @endguest
+
+                    @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-gradient fw-bold" href="#" role="button"
+                                data-bs-toggle="dropdown">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-secondary shadow">
+                                <li><a class="dropdown-item" href="/dashboard"><i class="fa-solid fa-gauge me-2"></i>
+                                        Dashboard</a></li>
+                                <li>
+                                    <hr class="dropdown-divider border-secondary">
+                                </li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -260,7 +291,8 @@
                         <div class="glass-card p-4 h-100">
                             <i class="fa-solid fa-church fs-1 mb-3 text-gradient"></i>
                             <h4 class="text-white">SI-Gereja</h4>
-                            <p class="text-secondary small">Sistem Informasi Manajemen Gereja St. Pio Langke Majok yang terintegrasi untuk
+                            <p class="text-secondary small">Sistem Informasi Manajemen Gereja St. Pio Langke Majok yang
+                                terintegrasi untuk
                                 pengelolaan data umat dan administrasi gereja.</p>
                             <span
                                 class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">Live
