@@ -34,9 +34,10 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install NPM & Build Asets
+      - name: Install NPM & Build Assets
         run: |
-          npm install
+          npm ci  # Menggunakan 'ci' lebih stabil untuk environment CI/CD daripada 'install'
+          chmod +x node_modules/.bin/vite
           npm run build
 
       # 5. Prepare .env for production (Optional but helpful)
