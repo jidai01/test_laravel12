@@ -528,26 +528,33 @@
 
         // -- UPDATED: Handle Refresh lebih robust --
         document.addEventListener('DOMContentLoaded', () => {
+            // 1. Ambil path URL (misal: /projects)
             const path = window.location.pathname;
-            // Ambil segment terakhir dari URL (misal: /my-app/contact -> contact)
-            let targetId = path.split("/").pop();
 
-            // Jika kosong (halaman utama), set ke null agar tidak error
-            if (targetId === "") targetId = null;
+            // 2. Ambil ID target (menghapus slash di depan)
+            // .replace(/^\//, "") akan mengubah "/contact" menjadi "contact"
+            let targetId = path.replace(/^\//, "");
 
-            // Cek apakah ada elemen dengan ID tersebut
-            if (targetId && document.getElementById(targetId)) {
-                // Gunakan setTimeout agar layout render sempurna sebelum scroll
+            // 3. Jika URL adalah root (/) atau targetId kosong, jangan lakukan scroll
+            if (!targetId || targetId === "") return;
+
+            // 4. Cari elemen berdasarkan ID
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                // Gunakan timeout untuk memastikan browser sudah selesai merender AOS atau elemen dinamis lainnya
                 setTimeout(() => {
-                    const targetElement = document.getElementById(targetId);
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                    const navHeight = 90; // Sesuaikan dengan tinggi navbar Anda
+
+                    // Ambil posisi absolut elemen dari atas dokumen
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - navHeight;
 
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
-                }, 300); // Delay ditambah sedikit
+                }, 500); // 500ms adalah sweet spot untuk memastikan layout sudah "siap"
             }
         });
 
