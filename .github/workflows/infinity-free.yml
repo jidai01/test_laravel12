@@ -42,6 +42,7 @@ jobs:
           server: ftpupload.net
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          timeout: 600000
           server-dir: jidai-test-laravel12.42web.io/htdocs/
           dangerously-disable-ci-check: true
           exclude: |
