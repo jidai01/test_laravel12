@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} - Admin Login</title>
+    <title>{{ config('app.name', 'JidaiIsHere') }} - Admin Login</title>
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='45' fill='none' stroke='%2360a5fa' stroke-width='2' opacity='0.5' /><path d='M60 30 V60 C60 71 51 80 40 80 C29 80 20 71 20 60' fill='none' stroke='%2360a5fa' stroke-width='8' stroke-linecap='round' /><circle cx='60' cy='20' r='6' fill='%23a855f7' /></svg>">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -31,9 +34,18 @@
         .auth-wrapper {
             width: 100%;
             max-width: 450px;
-            /* Ukuran ideal untuk card login */
             padding: 20px;
             z-index: 1;
+        }
+
+        /* Styling teks JidaiIsHere di bawah logo */
+        .brand-text {
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            font-size: 1.5rem;
         }
 
         .bg-pattern {
@@ -47,7 +59,6 @@
             z-index: -1;
         }
 
-        /* Memastikan elemen Vite/Tailwind tidak merusak layout Bootstrap */
         [hidden] {
             display: none !important;
         }
@@ -58,12 +69,14 @@
     <div class="bg-pattern"></div>
 
     <div class="auth-wrapper">
-        {{-- <div class="text-center mb-4">
-            <a href="/" class="text-decoration-none">
-                <i class="fa-solid fa-microchip fs-1 text-primary"
-                    style="filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));"></i>
+        <div class="text-center mb-5">
+            <a href="/" class="d-inline-block text-decoration-none">
+                <div class="mb-3">
+                    <x-application-logo class="w-20 h-20 mx-auto" />
+                </div>
+                <span class="brand-text">JidaiIsHere</span>
             </a>
-        </div> --}}
+        </div>
 
         <div class="main-content">
             {{ $slot }}
