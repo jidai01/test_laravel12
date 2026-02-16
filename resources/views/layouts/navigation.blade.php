@@ -18,7 +18,7 @@
             </div>
 
             <div class="nav-section-right">
-                <div class="desktop-only">
+                <div class="desktop-only dropdown-context">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="user-profile-btn">
@@ -26,25 +26,25 @@
                                     <i class="fa-solid fa-user-shield"></i>
                                 </div>
                                 <span class="user-name-text">{{ Auth::user()->name }}</span>
-                                <i class="fa-solid fa-chevron-down ms-2 small opacity-50"></i>
+                                <i class="fa-solid fa-chevron-down ms-icon opacity-50"></i>
                             </button>
                         </x-slot>
 
                         <x-slot name="content">
                             <div class="dropdown-glass-container">
-                                <x-dropdown-link :href="route('profile.edit')" class="dropdown-custom-item">
-                                    <i class="fa-solid fa-user-gear me-2"></i> {{ __('Profile Settings') }}
-                                </x-dropdown-link>
+                                <a href="{{ route('profile.edit') }}" class="dropdown-custom-item">
+                                    <i class="fa-solid fa-user-gear me-icon"></i>
+                                    <span>{{ __('Profile Settings') }}</span>
+                                </a>
 
                                 <div class="dropdown-divider"></div>
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault(); this.closest('form').submit();"
-                                        class="dropdown-custom-item logout-red">
-                                        <i class="fa-solid fa-power-off me-2"></i> {{ __('Log Out') }}
-                                    </x-dropdown-link>
+                                    <button type="submit" class="dropdown-custom-item logout-red">
+                                        <i class="fa-solid fa-power-off me-icon"></i>
+                                        <span>{{ __('Log Out') }}</span>
+                                    </button>
                                 </form>
                             </div>
                         </x-slot>
@@ -64,7 +64,7 @@
         <div class="mobile-links-wrapper">
             <a href="{{ route('dashboard') }}"
                 class="mobile-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                <i class="fa-solid fa-chart-line me-2"></i> {{ __('Dashboard') }}
+                <i class="fa-solid fa-chart-line me-icon"></i> {{ __('Dashboard') }}
             </a>
 
             <div class="mobile-user-profile">
@@ -74,32 +74,33 @@
                 </div>
 
                 <a href="{{ route('profile.edit') }}" class="mobile-nav-link">
-                    <i class="fa-solid fa-user-gear me-2"></i> {{ __('Profile') }}
+                    <i class="fa-solid fa-user-gear me-icon"></i> {{ __('Profile') }}
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="mobile-nav-link logout-text">
-                        <i class="fa-solid fa-power-off me-2"></i> {{ __('Log Out') }}
+                        <i class="fa-solid fa-power-off me-icon"></i> {{ __('Log Out') }}
                     </button>
                 </form>
             </div>
         </div>
     </div>
+
     <style>
-        /* RESET & VARIABLE */
         :root {
             --nav-bg: rgba(15, 23, 42, 0.85);
             --nav-border: rgba(255, 255, 255, 0.1);
             --accent-blue: #60a5fa;
             --text-muted: rgba(255, 255, 255, 0.6);
+            --dropdown-bg: rgba(15, 23, 42, 0.95);
         }
 
         .glass-navbar {
-            background: var(--nav-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--nav-border);
-            position: sticky;
+            background: var(--nav-bg) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border-bottom: 1px solid var(--nav-border) !important;
+            position: sticky !important;
             top: 0;
             z-index: 1000;
             height: 70px;
@@ -120,7 +121,6 @@
             height: 100%;
         }
 
-        /* LEFT SECTION */
         .nav-section-left {
             display: flex;
             align-items: center;
@@ -138,41 +138,41 @@
         }
 
         .nav-link-custom {
-            color: var(--text-muted);
-            text-decoration: none;
+            color: var(--text-muted) !important;
+            text-decoration: none !important;
             font-size: 0.95rem;
             font-weight: 500;
             display: flex;
             align-items: center;
             gap: 0.6rem;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             padding: 0.5rem 0;
         }
 
         .nav-link-custom:hover,
         .nav-link-custom.active {
-            color: #fff;
+            color: #fff !important;
         }
 
         .nav-link-custom.active {
             border-bottom: 2px solid var(--accent-blue);
         }
 
-        /* RIGHT SECTION & DROPDOWN */
+        /* DROPDOWN DESKTOP STYLING */
+        .dropdown-context {
+            position: relative;
+        }
+
         .user-profile-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--nav-border);
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            color: #fff;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid var(--nav-border) !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 12px !important;
+            color: #fff !important;
             display: flex;
             align-items: center;
             cursor: pointer;
             transition: 0.2s;
-        }
-
-        .user-profile-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
         }
 
         .user-avatar-wrapper {
@@ -187,26 +187,35 @@
             margin-right: 0.75rem;
         }
 
+        /* Container Dropdown yang muncul */
         .dropdown-glass-container {
-            background: rgba(15, 23, 42, 0.95) !important;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--nav-border);
-            /* border-radius: 12px; */
+            background: var(--dropdown-bg) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid var(--nav-border) !important;
+            border-radius: 12px !important;
             overflow: hidden;
-            min-width: 200px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            min-width: 220px;
+            margin-top: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
         }
 
         .dropdown-custom-item {
-            display: block;
-            padding: 0.8rem 1.2rem;
+            display: flex !important;
+            align-items: center;
+            width: 100%;
+            padding: 0.8rem 1.2rem !important;
             color: var(--text-muted) !important;
-            text-decoration: none;
+            text-decoration: none !important;
             font-size: 0.9rem;
+            background: transparent !important;
+            border: none !important;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
         .dropdown-custom-item:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08) !important;
             color: #fff !important;
         }
 
@@ -216,12 +225,15 @@
             margin: 0.2rem 0;
         }
 
-        .logout-red:hover {
-            background: rgba(239, 68, 68, 0.15);
+        .logout-red {
             color: #f87171 !important;
         }
 
-        /* MOBILE NAVIGATION */
+        .logout-red:hover {
+            background: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        /* MOBILE STYLING */
         .mobile-only {
             display: none;
         }
@@ -232,7 +244,6 @@
             color: #fff;
             font-size: 1.4rem;
             cursor: pointer;
-            padding: 0.5rem;
         }
 
         .nav-menu-mobile {
@@ -253,7 +264,6 @@
             padding: 1rem 1.5rem;
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 1rem;
         }
 
         .mobile-nav-link.active {
@@ -287,9 +297,18 @@
             background: none;
             width: 100%;
             text-align: left;
+            cursor: pointer;
         }
 
-        /* UTILITY & RESPONSIVE */
+        /* UTILITY */
+        .ms-icon {
+            margin-left: 0.5rem;
+        }
+
+        .me-icon {
+            margin-right: 0.75rem;
+        }
+
         .text-gradient {
             background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
             -webkit-background-clip: text;
@@ -308,7 +327,6 @@
             }
         }
 
-        /* ANIMATION */
         .nav-slide-down {
             animation: slideDown 0.3s ease-out forwards;
         }
