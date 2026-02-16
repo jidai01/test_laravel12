@@ -15,6 +15,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='45' fill='none' stroke='%2360a5fa' stroke-width='2' opacity='0.5' /><path d='M60 30 V60 C60 71 51 80 40 80 C29 80 20 71 20 60' fill='none' stroke='%2360a5fa' stroke-width='8' stroke-linecap='round' /><circle cx='60' cy='20' r='6' fill='%23a855f7' /></svg>">
+
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
