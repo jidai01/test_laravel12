@@ -43,7 +43,7 @@
                         style="display: none;">
 
                         <div class="dropdown-header">
-                            <span class="text-xs text-muted uppercase tracking-wider">Account</span>
+                            <span class="text-xs text-light uppercase tracking-wider">Account</span>
                         </div>
 
                         <a href="{{ route('profile.edit') }}" class="dropdown-item">
