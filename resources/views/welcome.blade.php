@@ -240,8 +240,16 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="/">
-                <i class="fa-solid fa-microchip text-gradient me-2"></i>JidaiIsHere
+            <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="/">
+                <svg width="35" height="35" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                    class="me-2">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#60a5fa" stroke-width="2"
+                        opacity="0.5" />
+                    <path d="M60 30 V60 C60 71 51 80 40 80 C29 80 20 71 20 60" fill="none" stroke="#60a5fa"
+                        stroke-width="8" stroke-linecap="round" />
+                    <circle cx="60" cy="20" r="6" fill="#a855f7" />
+                </svg>
+                JidaiIsHere
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
@@ -298,7 +306,8 @@
                         strategis.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="/projects" class="btn btn-primary px-4 py-3 rounded-4 nav-clean text-white shadow">View
+                        <a href="/projects"
+                            class="btn btn-primary px-4 py-3 rounded-4 nav-clean text-white shadow">View
                             Portfolio</a>
                         <a href="#" class="btn btn-outline-light px-4 py-3 rounded-4 hover-glass"><i
                                 class="fa-solid fa-download me-2"></i>Download CV</a>
