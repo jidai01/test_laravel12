@@ -28,24 +28,51 @@
             align-items: center;
             justify-content: center;
             margin: 0;
+            padding: 20px;
             font-family: 'Figtree', sans-serif;
         }
 
-        .auth-wrapper {
+        /* Container utama melebar untuk menampung logo + form */
+        .auth-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            /* Jarak antara logo dan form */
             width: 100%;
-            max-width: 450px;
-            padding: 20px;
+            max-width: 900px;
             z-index: 1;
         }
 
-        /* Styling teks JidaiIsHere di bawah logo */
+        /* Section Logo */
+        .brand-section {
+            flex: 1;
+            text-align: right;
+            padding-right: 2rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Section Form */
+        .form-section {
+            flex: 1;
+            max-width: 400px;
+        }
+
         .brand-text {
             background: linear-gradient(to right, #60a5fa, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
-            letter-spacing: -0.5px;
-            font-size: 1.5rem;
+            letter-spacing: -1px;
+            font-size: 2.5rem;
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .brand-subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            font-weight: 400;
         }
 
         .bg-pattern {
@@ -59,6 +86,25 @@
             z-index: -1;
         }
 
+        /* Responsif untuk Mobile */
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .brand-section {
+                border-right: none;
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .brand-text {
+                font-size: 2rem;
+            }
+        }
+
         [hidden] {
             display: none !important;
         }
@@ -68,18 +114,19 @@
 <body class="antialiased">
     <div class="bg-pattern"></div>
 
-    <div class="auth-wrapper">
-        <div class="text-center mb-5">
-            <a href="/" class="d-inline-block text-decoration-none">
-                <div class="mb-3">
-                    <x-application-logo class="w-20 h-20 mx-auto" />
-                </div>
-                <span class="brand-text">JidaiIsHere</span>
+    <div class="auth-container">
+        <div class="brand-section">
+            <a href="/" class="text-decoration-none">
+                <x-application-logo class="w-32 h-32 d-inline-block d-md-block ms-auto me-auto me-md-0" />
+                <h1 class="brand-text">JidaiIsHere</h1>
+                <p class="brand-subtitle">Data & Web Specialist Dashboard</p>
             </a>
         </div>
 
-        <div class="main-content">
-            {{ $slot }}
+        <div class="form-section">
+            <div class="main-content">
+                {{ $slot }}
+            </div>
         </div>
     </div>
 
